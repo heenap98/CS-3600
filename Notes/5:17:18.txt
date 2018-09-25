@@ -1,0 +1,98 @@
+NOTES FROM THURSDAY 5/17/18
+
+AGENDA FOR TODAY
+#################################
+What's an agent?
+Environment?
+Toy "cat" problem
+Search Intro
+Uninformed Search
+#################################
+
+What's an agent?
+-Anything that can receive its environment with sensors and act on it with effectors/actuators
+   !Actuators: sensors            !Sensing: Random or fixed behavior
+-Sense -> Think -> Act -> Sense ...
+-Function: A(s) -> a
+
+-Percept: Input from a sensor
+	-Wall: <S, W> -- Wall percept to say there is a wall in South and West direction
+-Percept Sequence: Remember a time series of all percepts
+
+t Walls Ears
+1, <S, W>, 4
+2, <S>, 3
+3, <N, E>, 3		ACTIONS NOT GIVEN ALONG WITH PERCEPT SEQUENCE
+
+A(percept sequence) -> actions
+Ex: [(1, <S, W>, 4), (2, <S>, 3)] -> E
+
+-Agent Program: Code/logic/implementation that uses rules to approximate A()
+	-Pattern matching
+--------------------------------------------
+EXAMPLE
+if ears(t) < ears(t - 1): 				# means I moved closer to nearest ghost
+	action = reverse(previous action) 	# go back the other way and get away from ghost
+else:
+	action = rand(action) s.t. doesn't reverse last action && doesn't go through a wall
+--------------------------------------------
+
+-Rationality: Act expected optimal
+	-Performance metric
+	-Example:
+		-Turns without dying for pacman
+		-Dots eaten by pacman
+
+----------------------------------------------------------------------------------------------------
+TOY CAT PROBLEM
+1. Cats like to be alone, bother people, be lazy
+2. (on paper)
+
+-State space: diagram from all actions on all possible spaces in the world
+	-Picture on phone
+
+PSEUDOCODE OF CAT:
+if ppl == Y:
+	then annoy
+else if other room not visited:
+	visit other room
+else:
+	do nothing
+
+-Have possibility of re-entry
+	-Check other room (how often?)
+
+In increasing level of complexity type of agent: reflex, model-based, goal-based, utility
+-Reflex agent: Current percepts -> actions
+-Model-Based: Current percepts -> update mental model of the world -> actions
+-Goal-Based: Current percepts -> update mental model of the world -> planning/prediction -> actions
+-Utility: Same thing as goal-based except with score involved (how well did we reach the goal)
+
+Environments: observability, determinism, dynamism, discretism, agents, episodic
+-Observability: Fully VS partially; Get all of some information about the world
+-Determinism: Deterministic world - All the changes that happen in the world are because of us and the actions we took VS Stochastic (Non-deterministic) world - We did something and the world changed in a way we didn't think it would
+-Dynamism: Static world - World is turn based (what happens to the world while we are thinking and planning) VS Dynamic world - World is continuing to change while we are trying to figure out what to do from last sensor readings
+-Discretism: Discrete - World is broken into finite number of chunks VS Continuous - World is potentially in infinitely many states
+-Agents: Single - Am I only intelligent agent in the world and everything in world reacts to me? VS Multiple - are there other things that sense and act besides me in the world?
+-Episodic: Episodic - History doesn't matter VS Sequential - History of the world explicitely matters (previous observations)
+
+----------------------------------------------------------------------------------------------------
+SEARCH INTRO
+-Search doesn't return series of states; search returns series of actions towards goal
+
+Goal-Based Search Agents
+-Search:
+	-S: Set of states
+	-S0: Initial state for search (only one)
+	-Sf: Set of final (goal) states
+	-A: Set of permissible actions
+	-T: Set of state to state transitions
+		-(s, a) -> s 				# state and action forms new state
+	-Action costs: optional (like weights on graph)
+
+Find a sequence of actions that transforms S0 into Sf
+
+MDP: R(s) -- Reward function
+
+
+
